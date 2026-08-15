@@ -18,9 +18,9 @@
   } @ inputs: let
   in {
     # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
+    # Available through 'nixos-rebuild --flake .#red-panda'
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      red-panda = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         # > Our main nixos configuration file <
         modules = [./nixos/configuration.nix];
@@ -28,9 +28,9 @@
     };
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#shvtesm@nixos'
+    # Available through 'home-manager --flake .#shvtesm@red-panda'
     homeConfigurations = {
-      "shvtesm@nixos" = home-manager.lib.homeManagerConfiguration {
+      "shvtesm@red-panda" = home-manager.lib.homeManagerConfiguration {
         # Home-manager requires 'pkgs' instance
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};

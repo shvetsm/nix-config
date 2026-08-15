@@ -58,7 +58,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "nixos";
+  networking.hostName = "red-panda";
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
