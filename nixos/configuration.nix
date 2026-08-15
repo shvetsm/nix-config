@@ -108,6 +108,13 @@
     extraGroups = ["networkmanager" "wheel"];
   };
 
+  users.users.shvetsm = {
+    isNormalUser = true;
+    description = "Mark Shvets";
+    extraGroups = ["networkmanager" "wheel"];
+  };
+
+
   # Install firefox.
   programs.firefox.enable = true;
 
