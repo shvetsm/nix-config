@@ -13,6 +13,7 @@
     # inputs.nix-colors.homeManagerModule
 
     ./desktop
+    ./fish.nix
   ];
 
   nixpkgs = {

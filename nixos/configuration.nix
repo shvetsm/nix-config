@@ -100,10 +100,13 @@
     pulse.enable = true;
   };
 
+  programs.fish.enable = true;
+
   users.users.shvetsm = {
     isNormalUser = true;
     description = "Mark Shvets";
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.fish;
   };
 
   # Install firefox.
