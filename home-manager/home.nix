@@ -13,6 +13,7 @@
     # inputs.nix-colors.homeManagerModule
 
     ./desktop
+    ./cli-tools.nix
     ./fish.nix
     ./git.nix
     ./zellij.nix
