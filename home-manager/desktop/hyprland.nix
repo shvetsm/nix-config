@@ -8,6 +8,8 @@
 }: let
   inherit (lib.generators) mkLuaInline;
 
+  wallpaper = ../../assets/wallpapers/cyberpunk-black-cat-rooftop.jpg;
+
   # `hl.bind(keys, dispatcher, opts?)` — one bind per list entry.
   mkBind = keys: dispatcher: opts:
     {
@@ -26,6 +28,17 @@ in {
     pkgs.xfce.thunar-archive-plugin
     pkgs.xfce.thunar-volman
   ];
+
+  # Same wallpaper as the greeter (nixos/desktop.nix) and veila's lock
+  # screen, so it stays consistent from login through to the desktop.
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      preload = ["${wallpaper}"];
+      wallpaper = [",${wallpaper}"];
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
