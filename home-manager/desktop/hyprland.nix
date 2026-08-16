@@ -69,10 +69,16 @@ in {
 
     settings = {
       # Laptop panel (eDP-1) stays at the origin; the external Dell U2725QE
-      # (DP-6) sits to its left. Position is in post-scale logical pixels, so
-      # at 3840x2160 scaled 1.25x the external monitor is 3072 logical px
-      # wide, hence x = -3072 to butt its right edge against the laptop's
-      # left edge. Both are top-aligned (y = 0).
+      # sits to its left. Position is in post-scale logical pixels, so at
+      # 3840x2160 scaled 1.25x the external monitor is 3072 logical px wide,
+      # hence x = -3072 to butt its right edge against the laptop's left
+      # edge. Both are top-aligned (y = 0).
+      #
+      # Matched by description rather than a DP-* port name: which port
+      # (DP-4, DP-6, ...) it enumerates as depends on which physical
+      # DisplayPort input is plugged in, so a port-name rule silently stops
+      # applying (falling back to Hyprland's auto-placement on the right)
+      # whenever the cable moves to a different port.
       monitor = [
         {
           output = "eDP-1";
@@ -81,7 +87,7 @@ in {
           scale = "1";
         }
         {
-          output = "DP-6";
+          output = "desc:Dell Inc. DELL U2725QE G89KNF4";
           mode = "preferred";
           position = "-3072x0";
           scale = "1.25";
