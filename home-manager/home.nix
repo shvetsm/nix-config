@@ -54,6 +54,7 @@
     claude-code
     enpass
     just
+    slack
   ];
 
   # Enable home-manager (git is configured in git.nix)
