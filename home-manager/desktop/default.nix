@@ -7,5 +7,7 @@
     ./waybar.nix
     ./fuzzel.nix
     ./swaync.nix
+    ./veila.nix
+    ./wlogout.nix
   ];
 }

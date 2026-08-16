@@ -13,6 +13,9 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     claude-code.url = "github:sadjow/claude-code-nix";
+
+    veila.url = "github:naurissteins/Veila/0.4.2";
+    veila.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

@@ -12,9 +12,9 @@
         position = "top";
         height = 34;
 
-        modules-left = ["hyprland/workspaces"];
+        modules-left = ["hyprland/workspaces" "wlr/taskbar"];
         modules-center = ["clock"];
-        modules-right = ["custom/swaync" "pulseaudio" "network" "battery" "tray"];
+        modules-right = ["custom/swaync" "pulseaudio" "network" "battery" "tray" "custom/power"];
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -52,6 +52,20 @@
         };
 
         tray.spacing = 10;
+
+        "wlr/taskbar" = {
+          format = "{icon}";
+          icon-size = 18;
+          tooltip-format = "{title}";
+          on-click = "activate";
+          on-click-middle = "close";
+        };
+
+        "custom/power" = {
+          format = "⏻";
+          tooltip = false;
+          on-click = "wlogout";
+        };
 
         "custom/swaync" = {
           tooltip = false;
@@ -136,6 +150,29 @@
 
       #custom-swaync {
         color: #f92aad;
+      }
+
+      #taskbar {
+        padding: 0 6px;
+      }
+
+      #taskbar item {
+        padding: 0 6px;
+        color: #f9f9f9;
+      }
+
+      #taskbar item.active {
+        color: #f92aad;
+      }
+
+      #custom-power {
+        padding: 0 10px;
+        color: #f92aad;
+        font-size: 16px;
+      }
+
+      #custom-power:hover {
+        color: #ff8b39;
       }
     '';
   };
