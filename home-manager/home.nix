@@ -16,6 +16,7 @@
     ./cli-tools.nix
     ./fish.nix
     ./git.nix
+    ./wavebox.nix
     ./zellij.nix
   ];
 
