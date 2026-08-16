@@ -90,6 +90,11 @@ in {
   };
 
   wayland.windowManager.hyprland.settings.bind = [
-    "$mod, L, exec, ${veilaBin} lock"
+    {
+      _args = [
+        "SUPER + L"
+        (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"${veilaBin} lock\")")
+      ];
+    }
   ];
 }
