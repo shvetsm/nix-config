@@ -47,6 +47,7 @@
   home.packages = with pkgs; [
     claude-code
     enpass
+    just
   ];
 
   # Enable home-manager and git

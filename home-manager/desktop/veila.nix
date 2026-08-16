@@ -13,22 +13,39 @@
   veiladBin = lib.getExe' veila "veilad";
   veilaBin = lib.getExe' veila "veila";
   passEnvironment = "WAYLAND_DISPLAY XDG_SESSION_ID XDG_SESSION_TYPE XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE";
+  wallpaper = ../../assets/wallpapers/cyberpunk-black-cat-rooftop.jpg;
   veilaConfig = ''
-    theme = "catppuccin"
+    # "diagonal" is the base theme's widget layout (centered clock/date, pill
+    # input, borderless icon row); every color below overrides it to
+    # Synthwave '84 and swaps the background for the desktop wallpaper.
+    theme = "diagonal"
 
     [lock]
     hide_cursor = false
     allow_empty_password = false
+
+    [background]
+    mode = "file"
+    path = "${wallpaper}"
+    color = "#150f22"
+    dim_strength = 40
+    tint = "rgba(249, 42, 173, 0.08)"
+
+    [visuals.clock]
+    color = "rgba(3, 237, 249, 0.94)"
+
+    [visuals.date]
+    color = "rgba(249, 249, 249, 0.55)"
 
     [visuals.input]
     placeholder = "󰌋"
     font_family = "JetBrainsMono Nerd Font"
     font_size = 30
     mask_color = "#f9f9f9"
-    background_color = "rgba(38, 35, 53, 1.0)"
+    background_color = "rgba(20, 17, 32, 0.55)"
     border_color = "#b93cf6"
     border_width = 2
-    radius = 8
+    radius = 27
 
     [visuals.placeholder]
     color = "#f92aad"
@@ -38,9 +55,22 @@
 
     [visuals.caps_lock]
     enabled = true
+    color = "#fede5d"
 
     [visuals.keyboard]
     enabled = false
+
+    [visuals.battery]
+    color = "#03edf9"
+
+    [visuals.power.poweroff]
+    color = "#fe4450"
+
+    [visuals.power.reboot]
+    color = "#ff8b39"
+
+    [visuals.power.suspend]
+    color = "#03edf9"
   '';
 in {
   home.packages = [veila];
