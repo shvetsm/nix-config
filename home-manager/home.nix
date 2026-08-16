@@ -14,6 +14,8 @@
 
     ./desktop
     ./fish.nix
+    ./git.nix
+    ./zellij.nix
   ];
 
   nixpkgs = {
@@ -45,14 +47,16 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+    (appimage-run.override {
+      extraPkgs = pkgs: [pkgs.libepoxy pkgs.xorg.libXv];
+    })
     claude-code
     enpass
     just
   ];
 
-  # Enable home-manager and git
+  # Enable home-manager (git is configured in git.nix)
   programs.home-manager.enable = true;
-  programs.git.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "25.11";

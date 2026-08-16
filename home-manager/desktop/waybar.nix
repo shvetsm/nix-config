@@ -1,7 +1,38 @@
 # Waybar: the workspace pager + status bar along the top of the screen.
 # Colors are Synthwave '84 (dark purple/navy with hot-pink + cyan neon
 # accents), hardcoded for now (no theme flake yet).
-{...}: {
+{pkgs, ...}: let
+  # Current conditions for Akron, OH via wttr.in's JSON endpoint. Emits
+  # waybar's {text, tooltip} JSON shape.
+  weatherScript = pkgs.writeShellScriptBin "waybar-weather" ''
+    set -euo pipefail
+
+    data=$(${pkgs.curl}/bin/curl -sf -m 10 'https://wttr.in/Akron,OH?format=j1') || exit 0
+
+    temp=$(${pkgs.jq}/bin/jq -r '.current_condition[0].temp_F' <<<"$data")
+    feels=$(${pkgs.jq}/bin/jq -r '.current_condition[0].FeelsLikeF' <<<"$data")
+    desc=$(${pkgs.jq}/bin/jq -r '.current_condition[0].weatherDesc[0].value' <<<"$data")
+    code=$(${pkgs.jq}/bin/jq -r '.current_condition[0].weatherCode' <<<"$data")
+
+    case "$code" in
+      113) icon="☀️" ;;
+      116) icon="⛅" ;;
+      119|122) icon="☁️" ;;
+      143|248|260) icon="🌫️" ;;
+      176|263|266|293|296|299|302|305|308|311|314|317|320|350|353|356|359|362|365|368|371|392|395) icon="🌧️" ;;
+      179|182|185|227|230|281|284|323|326|329|332|335|338|374|377) icon="🌨️" ;;
+      200|386|389) icon="⛈️" ;;
+      *) icon="🌡️" ;;
+    esac
+
+    ${pkgs.jq}/bin/jq -n \
+      --arg text "$icon  ''${temp}°F" \
+      --arg tooltip "$desc, feels like ''${feels}°F (Akron, OH)" \
+      '{text: $text, tooltip: $tooltip}'
+  '';
+in {
+  home.packages = [weatherScript pkgs.curl pkgs.jq];
+
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -14,14 +45,14 @@
 
         modules-left = ["hyprland/workspaces" "wlr/taskbar"];
         modules-center = ["clock"];
-        modules-right = ["custom/swaync" "pulseaudio" "network" "battery" "tray" "custom/power"];
+        modules-right = ["custom/swaync" "custom/weather" "pulseaudio" "network" "battery" "tray" "custom/power"];
 
         "hyprland/workspaces" = {
-          format = "{icon}";
-          format-icons = {
-            default = "";
-            active = "";
-          };
+          format = "{name}";
+          # SUPER+1..9,0 in hyprland.nix bind workspaces 1-9 and 0 (the "0"
+          # key maps to workspace id 0, not 10), so list all ten here to
+          # keep them visible even when empty.
+          persistent-workspaces."*" = [1 2 3 4 5 6 7 8 9 0];
         };
 
         clock = {
@@ -49,6 +80,13 @@
             warning = 20;
             critical = 10;
           };
+        };
+
+        "custom/weather" = {
+          exec = "${weatherScript}/bin/waybar-weather";
+          return-type = "json";
+          interval = 900;
+          tooltip = true;
         };
 
         tray.spacing = 10;
@@ -120,12 +158,17 @@
       #network,
       #battery,
       #custom-swaync,
+      #custom-weather,
       #tray {
         padding: 0 10px;
       }
 
       #clock {
         color: #03edf9;
+      }
+
+      #custom-weather {
+        color: #ff8b39;
       }
 
       #pulseaudio {

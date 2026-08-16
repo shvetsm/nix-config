@@ -4,9 +4,10 @@
 {...}: {
   imports = [
     ./hyprland.nix
+    ./hyprshell.nix
     ./waybar.nix
-    ./fuzzel.nix
     ./swaync.nix
+    ./swayosd.nix
     ./veila.nix
     ./wlogout.nix
   ];
