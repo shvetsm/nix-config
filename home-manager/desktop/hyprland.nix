@@ -20,7 +20,12 @@
   modKey = key: "${mod} + ${key}";
   modShiftKey = key: "${mod} + SHIFT + ${key}";
 in {
-  home.packages = [pkgs.pamixer];
+  home.packages = [
+    pkgs.pamixer
+    pkgs.xfce.thunar
+    pkgs.xfce.thunar-archive-plugin
+    pkgs.xfce.thunar-volman
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -83,6 +88,7 @@ in {
           (mkBind (modKey "V") "hl.dsp.window.float({ action = \"toggle\" })" null)
           (mkBind (modKey "F") "hl.dsp.window.fullscreen()" null)
           (mkBind (modKey "N") "hl.dsp.exec_cmd(\"swaync-client --toggle-panel --skip-wait\")" null)
+          (mkBind (modKey "E") "hl.dsp.exec_cmd(\"thunar\")" null)
 
           (mkBind (modKey "left") "hl.dsp.focus({ direction = \"l\" })" null)
           (mkBind (modKey "right") "hl.dsp.focus({ direction = \"r\" })" null)

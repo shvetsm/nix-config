@@ -103,4 +103,7 @@ in {
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Trash, network mounts, and thumbnails for Thunar.
+  services.gvfs.enable = true;
 }
