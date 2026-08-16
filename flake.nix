@@ -11,12 +11,15 @@
 
     # Hardware-specific NixOS modules
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    claude-code,
     ...
   } @ inputs: let
   in {
@@ -31,9 +34,9 @@
     };
 
     # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#shvtesm@red-panda'
+    # Available through 'home-manager --flake .#shvetsm@red-panda'
     homeConfigurations = {
-      "shvtesm@red-panda" = home-manager.lib.homeManagerConfiguration {
+      "shvetsm@red-panda" = home-manager.lib.homeManagerConfiguration {
         # Home-manager requires 'pkgs' instance
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs;};

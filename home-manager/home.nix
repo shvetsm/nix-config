@@ -12,8 +12,7 @@
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ./desktop
   ];
 
   nixpkgs = {
@@ -28,6 +27,7 @@
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
+       inputs.claude-code.overlays.default
     ];
     # Configure your nixpkgs instance
     config = {
@@ -37,13 +37,16 @@
   };
 
   home = {
-    username = "shvtesm";
-    homeDirectory = "/home/shvtesm";
+    username = "shvetsm";
+    homeDirectory = "/home/shvetsm";
   };
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [
+    claude-code
+    enpass
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

@@ -18,6 +18,9 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+
+    ./desktop.nix
+    ./fonts.nix
   ];
 
   nixpkgs = {
@@ -76,12 +79,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the Budgie Desktop environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.desktopManager.budgie.enable = true;
+  # Desktop (Hyprland + SDDM) lives in ./desktop.nix
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -102,7 +100,7 @@
     pulse.enable = true;
   };
 
-  users.users.shvtesm = {
+  users.users.shvetsm = {
     isNormalUser = true;
     description = "Mark Shvets";
     extraGroups = ["networkmanager" "wheel"];
@@ -112,9 +110,10 @@
   programs.firefox.enable = true;
 
   environment.systemPackages = with pkgs; [
+    git
     vim
-    enpass
     wget
+    ghostty
     zed-editor
   ];
 
