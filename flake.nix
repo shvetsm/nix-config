@@ -14,8 +14,11 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
-    veila.url = "github:naurissteins/Veila/0.4.2";
-    veila.inputs.nixpkgs.follows = "nixpkgs";
+    noctalia.url = "github:noctalia-dev/noctalia";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
+
+    qylock.url = "github:Darkkal44/qylock";
+    qylock.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

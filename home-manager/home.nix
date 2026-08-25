@@ -16,6 +16,8 @@
     ./cli-tools.nix
     ./fish.nix
     ./git.nix
+    ./logseq.nix
+    ./vscode.nix
     ./wavebox.nix
     ./zellij.nix
   ];
@@ -53,8 +55,23 @@
       extraPkgs = pkgs: [pkgs.libepoxy pkgs.xorg.libXv];
     })
     claude-code
+    deskflow
     enpass
+    gimp
     just
+    lan-mouse
+    nwg-displays
+    # Electron's Tray silently no-ops on Linux without libayatana-appindicator
+    # on the library path (no error, it just never registers a
+    # StatusNotifierItem), so its icon never reaches Noctalia's tray widget.
+    (pear-desktop.overrideAttrs (old: {
+      postFixup =
+        (old.postFixup or "")
+        + ''
+          wrapProgram $out/bin/pear-desktop \
+            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [libayatana-appindicator]}
+        '';
+    }))
     slack
   ];
 

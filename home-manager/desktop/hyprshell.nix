@@ -22,4 +22,10 @@
       };
     };
   };
+
+  # hyprshell talks to Hyprland's IPC socket directly, so it's useless (and
+  # noisy in the logs) under niri. Its unit is WantedBy=graphical-session.target,
+  # which both sessions reach, so gate it on the desktop the systemd user
+  # manager was started under.
+  systemd.user.services.hyprshell.Unit.ConditionEnvironment = "XDG_CURRENT_DESKTOP=Hyprland";
 }

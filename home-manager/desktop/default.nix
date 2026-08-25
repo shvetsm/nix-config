@@ -5,10 +5,10 @@
   imports = [
     ./hyprland.nix
     ./hyprshell.nix
-    ./waybar.nix
-    ./swaync.nix
+    ./fuzzel.nix
+    ./ghostty.nix
+    ./niri.nix
+    ./noctalia.nix
     ./swayosd.nix
-    ./veila.nix
-    ./wlogout.nix
   ];
 }

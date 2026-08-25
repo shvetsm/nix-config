@@ -9,6 +9,10 @@ switch-home:
 switch-os:
     ./scripts/switch-os.sh
 
+# Copy the display layout from nwg-displays into niri's config and apply it
+apply-displays:
+    ./scripts/apply-displays.sh
+
 # Check that the flake evaluates cleanly
 check:
     nix flake check

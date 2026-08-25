@@ -30,8 +30,9 @@ in {
     pkgs.xfce.thunar-volman
   ];
 
-  # Same wallpaper as the greeter (nixos/desktop.nix) and veila's lock
-  # screen, so it stays consistent from login through to the desktop.
+  # Same wallpaper as noctalia.nix's desktop background. The SDDM/qylock
+  # login screen (nixos/desktop.nix) uses its own bundled theme background
+  # instead, so this is no longer shared with it.
   #
   # hyprpaper 0.8 rewrote its config parser (hyprlang-based) and dropped the
   # old flat `preload = path` / `wallpaper = eDP-1,path` syntax entirely —
@@ -131,9 +132,9 @@ in {
       };
 
       # Moonfin (Jellyfin client, ~/Applications/Moonfin.AppImage) has no way
-      # to request a Wayland idle-inhibit itself, so veila's idle-lock timer
-      # (veila.nix) would otherwise fire mid-playback. Only inhibit while
-      # fullscreen so it still locks if the app is left open in a window.
+      # to request a Wayland idle-inhibit itself, so Noctalia's auto-lock
+      # timer (noctalia.nix) would otherwise fire mid-playback. Only inhibit
+      # while fullscreen so it still locks if the app is left open in a window.
       window_rule = {
         match.class = "^(org.moonfin.linux)$";
         idle_inhibit = "fullscreen";
@@ -148,8 +149,9 @@ in {
           (mkBind (modKey "M") "hl.dsp.exit()" null)
           (mkBind (modKey "V") "hl.dsp.window.float({ action = \"toggle\" })" null)
           (mkBind (modKey "F") "hl.dsp.window.fullscreen()" null)
-          (mkBind (modKey "N") "hl.dsp.exec_cmd(\"swaync-client --toggle-panel --skip-wait\")" null)
+          (mkBind (modKey "N") "hl.dsp.exec_cmd(\"noctalia msg panel-toggle control-center notifications\")" null)
           (mkBind (modKey "E") "hl.dsp.exec_cmd(\"thunar\")" null)
+          (mkBind (modKey "L") "hl.dsp.exec_cmd(\"noctalia msg session lock\")" null)
 
           (mkBind (modKey "left") "hl.dsp.focus({ direction = \"l\" })" null)
           (mkBind (modKey "right") "hl.dsp.focus({ direction = \"r\" })" null)
@@ -178,8 +180,8 @@ in {
           (mkBind (modKey "mouse:272") "hl.dsp.window.drag()" {mouse = true;})
           (mkBind (modKey "mouse:273") "hl.dsp.window.resize()" {mouse = true;})
 
-          # Media keys: locked = true so they still work while veila has the
-          # screen locked. swayosd-client (swayosd.nix) both performs the
+          # Media keys: locked = true so they still work while Noctalia has
+          # the screen locked. swayosd-client (swayosd.nix) both performs the
           # action and shows the on-screen level indicator; volume/brightness
           # also repeat while held.
           (mkBind "XF86AudioRaiseVolume" "hl.dsp.exec_cmd(\"swayosd-client --output-volume raise\")" {

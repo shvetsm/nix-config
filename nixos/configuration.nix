@@ -22,7 +22,7 @@
     ./desktop.nix
     ./fonts.nix
 
-    inputs.veila.nixosModules.default
+    inputs.qylock.nixosModules.default
   ];
 
   nixpkgs = {
@@ -103,9 +103,6 @@
   };
 
   programs.fish.enable = true;
-
-  # Veila screen locker: installs binaries and the `veila` PAM service.
-  programs.veila.enable = true;
 
   users.users.shvetsm = {
     isNormalUser = true;
