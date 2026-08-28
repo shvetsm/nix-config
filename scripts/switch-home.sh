@@ -3,4 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-home-manager switch --flake ".#shvetsm@red-panda" "$@"
+# -b: when a plain file already sits where home-manager wants to place a
+# symlink, move it aside (e.g. foo -> foo.backup) instead of aborting with
+# "existing file is in the way".
+home-manager switch --flake ".#shvetsm@red-panda" -b backup "$@"
