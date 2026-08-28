@@ -92,6 +92,21 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Canon LBP646C on the LAN. Uses CUPS's built-in IPP Everywhere ("everywhere")
+  # driver rather than Canon's proprietary UFRII blob, since this printer
+  # supports driverless AirPrint/Mopria printing.
+  hardware.printers = {
+    ensureDefaultPrinter = "Canon_LBP646C";
+    ensurePrinters = [
+      {
+        name = "Canon_LBP646C";
+        description = "Canon LBP646C";
+        deviceUri = "ipp://192.168.8.105/ipp/print";
+        model = "everywhere";
+      }
+    ];
+  };
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;

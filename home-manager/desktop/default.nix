@@ -3,6 +3,7 @@
 # the top-level home.nix.
 {...}: {
   imports = [
+    ./gtk.nix
     ./hyprland.nix
     ./hyprshell.nix
     ./fuzzel.nix

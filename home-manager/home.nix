@@ -46,6 +46,12 @@
   home = {
     username = "shvetsm";
     homeDirectory = "/home/shvetsm";
+
+    # When `home-manager switch` finds a plain file already sitting where it
+    # wants to place a symlink, it normally aborts with "existing file is in
+    # the way" instead of overwriting it. This makes it back the conflicting
+    # file up (e.g. foo -> foo.backup) and proceed.
+    backupFileExtension = "backup";
   };
 
   # Add stuff for your user as you see fit:

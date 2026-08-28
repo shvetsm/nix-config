@@ -25,9 +25,9 @@ in {
   home.packages = [
     pkgs.pamixer
     pkgs.playerctl
-    pkgs.xfce.thunar
-    pkgs.xfce.thunar-archive-plugin
-    pkgs.xfce.thunar-volman
+    pkgs.thunar
+    pkgs.thunar-archive-plugin
+    pkgs.thunar-volman
   ];
 
   # Same wallpaper as noctalia.nix's desktop background. The SDDM/qylock
