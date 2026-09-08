@@ -118,6 +118,9 @@
     pulse.enable = true;
   };
 
+  # fingerprint reader
+  services.fprintd.enable = true;
+  
   programs.fish.enable = true;
 
   users.users.shvetsm = {
