@@ -73,6 +73,7 @@
         '';
     }))
     slack
+    vlc
   ];
 
   # Enable home-manager (git is configured in git.nix)

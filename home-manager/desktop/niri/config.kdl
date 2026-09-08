@@ -85,10 +85,10 @@ output "eDP-1" {
     position x=2560 y=888
 }
 
-output "DP-6" {
+output "DP-4" {
     mode "3840x2160@59.997"
     scale 1.5
-    position x=0 y=217
+    position x=0 y=0
 }
 // END nwg-displays outputs
 

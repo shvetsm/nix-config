@@ -28,5 +28,7 @@
   home.packages = with pkgs; [
     herdr
     fresh-editor
+    htop
+    go
   ];
 }

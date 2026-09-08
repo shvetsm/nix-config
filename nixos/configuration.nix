@@ -65,6 +65,7 @@
 
   networking.hostName = "red-panda";
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [ 8090 3456 ];
 
   time.timeZone = "America/New_York";
 
@@ -135,6 +136,7 @@
     wget
     ghostty
     zed-editor
+    usbutils
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
