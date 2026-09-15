@@ -22,7 +22,7 @@
     ./desktop.nix
     ./fonts.nix
 
-    inputs.qylock.nixosModules.default
+    inputs.noctalia-greeter.nixosModules.default
   ];
 
   nixpkgs = {
@@ -120,7 +120,15 @@
 
   # fingerprint reader
   services.fprintd.enable = true;
-  
+
+  # fprintAuth defaults to on for every PAM service once fprintd is enabled
+  # (incl. "login" — both sddm's and greetd's PAM stacks substack into it).
+  # pam_fprintd runs before pam_unix, so the password prompt is gated behind
+  # it: a failed/slow scan makes the greeter look hung for ~25s before
+  # falling back to password. Keep fingerprint for sudo and the lock screen;
+  # login stays password-only.
+  security.pam.services.login.fprintAuth = false;
+
   programs.fish.enable = true;
 
   users.users.shvetsm = {

@@ -11,5 +11,6 @@
     ./niri.nix
     ./noctalia.nix
     ./swayosd.nix
+    ./umbriel.nix
   ];
 }

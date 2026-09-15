@@ -17,8 +17,11 @@
     noctalia.url = "github:noctalia-dev/noctalia";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
 
-    qylock.url = "github:Darkkal44/qylock";
-    qylock.inputs.nixpkgs.follows = "nixpkgs";
+    umbriel.url = "git+https://github.com/noctalia-dev/umbriel";
+    umbriel.inputs.nixpkgs.follows = "nixpkgs";
+
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
+    noctalia-greeter.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

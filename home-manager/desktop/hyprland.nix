@@ -30,9 +30,9 @@ in {
     pkgs.thunar-volman
   ];
 
-  # Same wallpaper as noctalia.nix's desktop background. The SDDM/qylock
-  # login screen (nixos/desktop.nix) uses its own bundled theme background
-  # instead, so this is no longer shared with it.
+  # Same wallpaper as noctalia.nix's desktop background. The noctalia-greeter
+  # login screen (nixos/desktop.nix) has its own theming, so this is not
+  # shared with it.
   #
   # hyprpaper 0.8 rewrote its config parser (hyprlang-based) and dropped the
   # old flat `preload = path` / `wallpaper = eDP-1,path` syntax entirely —

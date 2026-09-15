@@ -1,5 +1,11 @@
 # Hyprland desktop: Wayland compositor + login manager.
-{...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.umbriel.nixosModules.default];
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -14,6 +20,14 @@
   # entry at the greeter (services.displayManager.sessionPackages) without
   # touching the Hyprland setup above.
   programs.niri.enable = true;
+
+  # Third session, built by the Noctalia devs specifically to pair with it
+  # (home-manager/desktop/umbriel.nix). Adds a "Umbriel" entry at the
+  # greeter (its own sessionPackages wiring lives in the flake's
+  # nixosModules.default) and is pre-selected as the SDDM default; Hyprland
+  # and niri remain as selectable fallbacks.
+  programs.umbriel.enable = true;
+  services.displayManager.defaultSession = "umbriel";
 
   # hci0 is present (rfkill list) but was never turned on at the OS level;
   # needed for Noctalia's bluetooth widget and the bzmenu tool in
@@ -35,18 +49,17 @@
     binPath = "/run/current-system/sw/bin/Hyprland";
   };
 
-  # Login screen: SDDM running qylock's "pixel-night-city" theme (replaces
-  # greetd + noctalia-greeter). quickshell.enable is off since the in-session
-  # lock screen is now Noctalia's own (home-manager/desktop/noctalia.nix),
-  # not qylock's Quickshell lockscreen (`qylock-lock`) — this only installs
-  # the SDDM greeter theme.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-
-  programs.qylock = {
+  # Login screen: noctalia-greeter, a greetd-based greeter built by the
+  # Noctalia devs to match the in-session Noctalia shell look. Replaces the
+  # SDDM + qylock greeter (github:Darkkal44/qylock) tried previously — its
+  # "umbriel" session failed to hand off to the compositor on first login
+  # (start-umbriel exited instantly with no journal trace, most likely a
+  # startup race rather than anything qylock-specific), so backing out to
+  # this while that's unresolved.
+  services.displayManager.noctalia-greeter = {
     enable = true;
-    theme = "pixel-night-city";
-    quickshell.enable = false;
+    package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    settings.session.default = "umbriel";
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
