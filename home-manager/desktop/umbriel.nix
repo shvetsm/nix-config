@@ -109,8 +109,8 @@
         "Mod+M" = "window-toggle-maximize-to-edges";
         "Mod+F" = "window-toggle-fullscreen";
         "Mod+Ctrl+F" = "window-toggle-maximize";
-        "Mod+R" = "window-cycle-width";
-        "Mod+Shift+R" = "window-cycle-width-back";
+        "Mod+R" = "window-cycle-primary-extent";
+        "Mod+Shift+R" = "window-cycle-primary-extent-back";
         "Mod+Comma" = "window-consume-left";
         "Mod+Period" = "window-consume-right";
 

@@ -48,7 +48,7 @@
   nix = {
     settings = {
       # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
+      experimental-features = [ "nix-command" "flakes" ];
       # Opinionated: disable global registry
       flake-registry = "";
     };
@@ -140,6 +140,12 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  # Steam (also sets up 32-bit graphics, udev rules for controllers, etc.)
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
 
   environment.systemPackages = with pkgs; [
     git

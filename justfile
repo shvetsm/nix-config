@@ -16,3 +16,8 @@ apply-displays:
 # Check that the flake evaluates cleanly
 check:
     nix flake check
+
+# Update flake inputs (nixpkgs, home-manager, etc.) then apply the new config
+update:
+    nix flake update
+    just switch
