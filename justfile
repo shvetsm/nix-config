@@ -21,3 +21,8 @@ check:
 update:
     nix flake update
     just switch
+
+# Bump pinned AppImages (Wavebox, Logseq) to their latest releases then apply
+update-appimages:
+    ./scripts/update-appimages.sh
+    just switch-home

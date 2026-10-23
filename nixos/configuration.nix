@@ -122,12 +122,15 @@
   services.fprintd.enable = true;
 
   # fprintAuth defaults to on for every PAM service once fprintd is enabled
-  # (incl. "login" — both sddm's and greetd's PAM stacks substack into it).
-  # pam_fprintd runs before pam_unix, so the password prompt is gated behind
-  # it: a failed/slow scan makes the greeter look hung for ~25s before
-  # falling back to password. Keep fingerprint for sudo and the lock screen;
-  # login stays password-only.
-  security.pam.services.login.fprintAuth = false;
+  # (incl. "login" — greetd's PAM stack substacks into it). pam_fprintd runs
+  # before pam_unix, so the password prompt is gated behind it: with the
+  # defaults (3 tries, 30s) a failed/slow scan made the greeter look hung for
+  # ~25s before falling back to password. Cap it at one try and the 10s
+  # minimum timeout so the password fallback comes quickly.
+  security.pam.services.login.rules.auth.fprintd.args = [
+    "max-tries=1"
+    "timeout=10"
+  ];
 
   programs.fish.enable = true;
 

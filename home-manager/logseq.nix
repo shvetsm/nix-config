@@ -1,12 +1,12 @@
 # Logseq: nixpkgs' package bundles an EOL/insecure electron build, so pin
 # their official AppImage directly and run it through the appimage-run
-# wrapper (same mechanism as Wavebox). Bump `version`/`url`/`hash` together
-# to update.
+# wrapper (same mechanism as Wavebox). `just update-appimages` bumps
+# `version`/`hash` to the latest release.
 {pkgs, ...}: let
-  version = "2.0.1";
+  version = "2.0.2";
   logseqAppImage = pkgs.fetchurl {
     url = "https://github.com/logseq/logseq/releases/download/${version}/Logseq-linux-x86_64-${version}.AppImage";
-    hash = "sha256-Sd42cHizdnD+vbmH5WK3Xe4eGulsKL+4c4d5xCKX3Qw=";
+    hash = "sha256-EzVyVib2y/vzsAt3Q6YDVtLX2tEjzwC7+XSpvu9VaHA=";
   };
 in {
   home.packages = [
